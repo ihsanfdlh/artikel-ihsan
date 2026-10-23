@@ -6,13 +6,13 @@
 <hr>
 
 @if ($errors->any())
- <div style="background:#fee2e2; padding:10px;">
- <ul>
- @foreach ($errors->all() as $error)
- <li>{{ $error }}</li>
- @endforeach
- </ul>
- </div>
+    <div style="background:#fee2e2; padding:10px;">
+        <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+        </ul>
+    </div>
 @endif
 
 <form action="{{ route('artikel.store') }}" method="POST">
