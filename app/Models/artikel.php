@@ -15,4 +15,17 @@ class Artikel extends Model
     {
         return $this->hasMany(komentar::class, 'artikel_id');
     }
+
+    public function kategori()
+    {
+        return $this->belongsTo(kategori::class, 'kategori_id');
+    }
+    public function scopeTerbit($query)
+    {
+        return $query->where('status', 'terbit');
+    }
+    public function scopeDraft($query)
+    {
+        return $query->where('status', 'draft');
+    }
 }

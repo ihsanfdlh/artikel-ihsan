@@ -126,7 +126,7 @@
 
 <div class="komentar-section">
     <h2>Komentar</h2>
-
+    @auth
     <form action="{{ route('komentar.store') }}" method="POST">
         @csrf
         <input type="hidden" name="artikel_id" value="{{ $artikel->id }}">
