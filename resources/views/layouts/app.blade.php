@@ -66,8 +66,8 @@
         <button type="submit">Logout</button>
         </form>
         @else
-        <a href="{{ route('login') }}">Login</a>
-        <a href="{{ route('register') }}">Daftar</a>
+            <a href="{{ route('login') }}">Login</a>
+            <a href="{{ route('register') }}">Daftar</a>
         @endauth
         </nav>
 

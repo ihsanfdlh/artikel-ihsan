@@ -108,11 +108,10 @@
     <a href="{{ route('artikel.edit', $artikel->id) }}"
        class="btn btn-edit">
         Edit Artikel
-    </a>
-
+</a>
     <form action="{{ route('artikel.destroy', $artikel->id) }}"
-          method="POST"
-          onsubmit="return confirm('Yakin ingin menghapus artikel ini?')">
+        method="POST"
+        onsubmit="return confirm('Yakin ingin menghapus artikel ini?')">
 
         @csrf
         @method('DELETE')
@@ -145,6 +144,7 @@
             </div>
         @endforeach
     </div>
+    @endauth
 </div>
 
 @endsection

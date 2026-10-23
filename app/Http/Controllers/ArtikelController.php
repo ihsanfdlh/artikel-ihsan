@@ -44,6 +44,10 @@ class ArtikelController extends Controller
 
     public function edit(Artikel $artikel)
     {
+        if (auth()->id() !== $artikel->user_id) {
+            abort(403, 'Anda tidak memiliki izin mengedit artikel ini. Bukan artikel anda');
+        }
+
         return view('artikel.edit', compact('artikel'));
     }
 
@@ -69,10 +73,14 @@ class ArtikelController extends Controller
 
     public function destroy(Artikel $artikel)
     {
+        if (auth()->id() !== $artikel->user_id) {
+            abort(403, 'Anda tidak memiliki izin menghapus artikel ini. Bukan artikel anda');
+        }
+
         $artikel->delete();
 
         return redirect()
             ->route('artikel.index')
-            ->with('pesan', 'Artikel berhasil dihapus');
+            ->with('pesan', 'Artikel berhasil dihapus.');
     }
 }
