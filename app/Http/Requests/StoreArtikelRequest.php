@@ -7,12 +7,9 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreArtikelRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return true; // izinkan semua pengguna yang lolos middleware menjalankan request ini
+        return true;
     }
 
     public function rules(): array

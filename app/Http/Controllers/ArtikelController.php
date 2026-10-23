@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreArtikelRequest;
+use App\Http\Requests\UpdateArtikelRequest;
 use App\Models\Artikel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -11,7 +12,7 @@ class ArtikelController extends Controller
 {
     public function index()
     {
-        $artikel = Artikel::with('penulis')
+        $artikel = Artikel::with('penulis', 'kategori')
             ->latest()
             ->paginate(10);
 
@@ -30,7 +31,10 @@ class ArtikelController extends Controller
         $data['slug'] = Str::slug($data['judul']);
         $data['user_id'] = auth()->id() ?? 1;
 
-        Artikel::create($request->validated() + ['user_id' => auth()->id(), 'slug' => Str::slug($request->judul)]);
+        Artikel::create($request->validated() + [
+            'user_id' => auth()->id(),
+            'slug' => Str::slug($request->judul)
+        ]);
 
         return redirect()
             ->route('artikel.index')
@@ -51,20 +55,17 @@ class ArtikelController extends Controller
         return view('artikel.edit', compact('artikel'));
     }
 
-    public function update(Request $request, Artikel $artikel)
+    public function update(UpdateArtikelRequest $request, Artikel $artikel)
     {
-        $request->validate([
-            'judul' => 'required|string|max:255',
-            'isi' => 'required|string',
-            'status' => 'required|in:draf,terbit',
-        ]);
+        $data = $request->validated();
 
-        $artikel->update([
-            'judul' => $request->judul,
-            'slug' => Str::slug($request->judul),
-            'isi' => $request->isi,
-            'status' => $request->status,
-        ]);
+        if (auth()->id() !== $artikel->user_id) {
+            abort(403, 'Anda tidak memiliki izin mengedit artikel ini.');
+        }
+
+        $data['slug'] = Str::slug($data['judul']);
+
+        $artikel->update($data);
 
         return redirect()
             ->route('artikel.index')
