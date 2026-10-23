@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\KomentarController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -10,7 +11,8 @@ Route::get('/', function () {
 
 Route::resource('artikel', ArtikelController::class)->only(['index', 'show']);
 Route::middleware('auth')->group(function () {
- Route::resource('artikel', ArtikelController::class)->except(['index', 'show']);
+    Route::resource('artikel', ArtikelController::class)->except(['index', 'show']);
+    Route::resource('komentar', KomentarController::class)->only(['store']);
 });
 
 Route::get('/register', [AuthController::class, 'formRegister'])->name('register');

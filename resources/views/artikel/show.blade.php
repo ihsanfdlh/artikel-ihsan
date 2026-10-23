@@ -123,4 +123,28 @@
     </form>
 </div>
 
+
+<div class="komentar-section">
+    <h2>Komentar</h2>
+
+    <form action="{{ route('komentar.store') }}" method="POST">
+        @csrf
+        <input type="hidden" name="artikel_id" value="{{ $artikel->id }}">
+        <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+
+        <textarea name="isi" rows="3" placeholder="Tulis komentar..."></textarea>
+        <button type="submit">Kirim</button>
+    </form>
+
+    <div class="komentar-list">
+        @foreach ($artikel->komentar as $komentar)
+            <div class="komentar">
+                <strong>{{ $komentar->user->name }}</strong>
+                <small>{{ $komentar->created_at->format('d M Y') }}</small>
+                <p>{{ $komentar->isi }}</p>
+            </div>
+        @endforeach
+    </div>
+</div>
+
 @endsection

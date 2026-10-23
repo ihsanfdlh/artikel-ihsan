@@ -18,6 +18,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Artikel::class, 'user_id');
     }
+    public function komentars()
+    {
+        return $this->hasMany(komentar::class, 'user_id');
+    }
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 

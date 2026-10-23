@@ -6,8 +6,13 @@ class Artikel extends Model
 {
  use HasFactory;
  protected $fillable = ['user_id', 'judul', 'slug', 'isi', 'status', 'kategori_id'];
- public function penulis()
- {
- return $this->belongsTo(User::class, 'user_id');
- }
+    public function penulis()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function komentar()
+    {
+        return $this->hasMany(komentar::class, 'artikel_id');
+    }
 }
