@@ -9,11 +9,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('artikel', ArtikelController::class)->only(['index', 'show']);
+
 Route::middleware('auth')->group(function () {
-    Route::resource('artikel', ArtikelController::class)->except(['index', 'show']);
+    Route::resource('artikel', ArtikelController::class)->except(['index', 'show',]);
     Route::resource('komentar', KomentarController::class)->only(['store']);
 });
+Route::resource('artikel', ArtikelController::class)->only(['index', 'show']);
 
 Route::get('/register', [AuthController::class, 'formRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);

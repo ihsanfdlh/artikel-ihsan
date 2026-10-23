@@ -14,10 +14,6 @@
  </ul>
  </div>
 @endif
-<input type="text" name="judul" value="{{ old('judul') }}">
-@error('judul')
- <small style="color:red;">{{ $message }}</small>
-@enderror
 
 <form action="{{ route('artikel.store') }}" method="POST">
  @csrf

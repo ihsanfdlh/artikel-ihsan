@@ -5,7 +5,7 @@
 <a href="{{ route('artikel.index') }}">Kembali</a><br>
 <hr>
 
-<form action="{{ route('artikel.store') }}" method="POST">
+<form action="{{ route('artikel.update', $artikel->id) }}" method="POST">
  @csrf
  @method('PUT')
  <table style="width: 100%">

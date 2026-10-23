@@ -20,7 +20,6 @@ class StoreArtikelRequest extends FormRequest
     return [
         'judul' => 'required|min:5|max:255',
         'isi' => 'required|min:20',
-        'slug' => ''
         'status' => 'required|in:draft,terbit',
     ];
     }
